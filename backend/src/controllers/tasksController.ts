@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
+import getAllTasks from "../models/Tasks";
 
-const getAll = (request: Request, response: Response): void => {
-  response.status(200).json({ message: "Ccontroller getAll funcionando." });
+const getAll = async (request: Request, response: Response): Promise<void> => {
+  const tasks = await getAllTasks();
+  response.status(200).json(tasks);
 };
 
 export default getAll;
