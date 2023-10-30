@@ -1,9 +1,8 @@
 import express from "express";
+import getAll  from "./controllers/tasksController";
 
 const router = express.Router();
 
-// router.get("/tasks", (req, res) =>
-//   res.status(200).send("O router está funcionando.")
-// );
+router.get("/tasks", getAll);
 
 export { router };
