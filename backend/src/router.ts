@@ -1,8 +1,9 @@
 import express from "express";
-import getAll  from "./controllers/tasksController";
+import {getAll, newTask} from "./controllers/tasksController";
 
 const router = express.Router();
 
 router.get("/tasks", getAll);
+router.post("/tasks", newTask);
 
 export { router };
