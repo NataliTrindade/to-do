@@ -20,9 +20,13 @@ const createNewTask = async (task: Task) => {
   if ("affectedRows" in createdTaks && createdTaks.affectedRows === 1) {
     return { id: createdTaks.insertId };
   } else {
-    // Tratar erro de inserção, se necessário
     throw new Error("Falha ao inserir a tarefa.");
   }
 };
 
-export { getAllTasks, createNewTask };
+const deleteTask =  async (id: number) => {
+  const deletedTask = await connection.execute("DELETE FROM tasks WHERE id = ?", [id]);
+  return deletedTask;
+};
+
+export { getAllTasks, createNewTask, deleteTask};

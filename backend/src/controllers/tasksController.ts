@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllTasks, createNewTask } from "../models/Tasks";
+import { getAllTasks, createNewTask, deleteTask } from "../models/Tasks";
 
 const getAll = async (_request: Request, response: Response): Promise<void> => {
   const tasks = await getAllTasks();
@@ -14,4 +14,15 @@ const newTask = async (
   return response.status(201).json(newTaskCreated);
 };
 
-export { getAll, newTask };
+const deleteTasks = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const { id } = request.params;
+  const taskId = Number(id);
+  
+  await deleteTask(taskId);
+  return response.status(204).json();
+};
+
+export { getAll, newTask, deleteTasks };
