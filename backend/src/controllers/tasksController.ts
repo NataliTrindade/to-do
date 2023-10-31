@@ -1,5 +1,10 @@
 import { Request, Response } from "express";
-import { getAllTasks, createNewTask, deleteTask } from "../models/Tasks";
+import {
+  getAllTasks,
+  createNewTask,
+  deleteTask,
+  updateTask,
+} from "../models/Tasks";
 
 const getAll = async (_request: Request, response: Response): Promise<void> => {
   const tasks = await getAllTasks();
@@ -20,9 +25,19 @@ const deleteTasks = async (
 ): Promise<Response> => {
   const { id } = request.params;
   const taskId = Number(id);
-  
+
   await deleteTask(taskId);
   return response.status(204).json();
 };
 
-export { getAll, newTask, deleteTasks };
+const updatedTask = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const { id } = request.params;
+  const taskId = Number(id);
+  await updateTask(taskId, request.body);
+  return response.status(204).json();
+};
+
+export { getAll, newTask, deleteTasks, updatedTask };
